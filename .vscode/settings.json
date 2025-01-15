@@ -1,0 +1,10 @@
+{
+    "markdown.marp.themes": [
+        "./theme.scss"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#043605",
+        "titleBar.activeBackground": "#064C07",
+        "titleBar.activeForeground": "#EFFEEF"
+    }
+}

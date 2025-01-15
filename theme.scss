@@ -1,0 +1,765 @@
+/* @theme notebook */
+
+/* ----------------------------------------------------------
+   0) IMPORT FONTS
+   ---------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+/* ----------------------------------------------------------
+      1) GLOBAL BASE STYLES
+      ---------------------------------------------------------- */
+section,
+p,
+li,
+body,
+.katex {
+    font-family: 'Patrick Hand', cursive, sans-serif;
+    font-size: 24px !important;
+    line-height: 1.2;
+    color: #0c11a2;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    /* no global shadow */
+}
+
+p b,
+p strong,
+li b,
+li strong {
+    font-size: 1.05em;
+    /* helps text look heavier in cursive fonts */
+    color: #b63d3d !important;
+
+    /* Subtle shadow to ‘fatten’ the strokes */
+    text-shadow: 0.9px 0 0 #00000055;
+    /* horizontal shadow, half-transparent black */
+}
+
+/* Headings in Concert One */
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Concert One', cursive, sans-serif;
+    color: #a03232;
+    text-align: center;
+    margin: 0.5em 0;
+}
+
+/* Default heading sizes */
+h1 {
+    font-size: 36px !important;
+}
+
+h2 {
+    font-size: 30px !important;
+}
+
+h3 {
+    font-size: 26px !important;
+}
+
+h4 {
+    font-size: 22px !important;
+}
+
+/* ----------------------------------------------------------
+      2) TITLE SLIDE (the very first slide)
+      ---------------------------------------------------------- */
+
+/* Outer Marp slide (the 1st <section>) */
+section:nth-of-type(1) {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    background-color: #b2d8b2;
+    overflow: hidden;
+}
+
+/* Let the inner <section> also fill the entire 1280×720 */
+section:nth-of-type(1) section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Paper container (the white sheet) */
+section:nth-of-type(1) section .paper-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Lined paper background */
+section:nth-of-type(1) section .lined-paper {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom,
+            #fff4eb 0,
+            #fff4eb 25px,
+            #f2dcc7 26px);
+}
+
+/* Centered title container */
+section:nth-of-type(1) section .title-container {
+    position: absolute;
+    top: 36%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Big peach background behind title text */
+section:nth-of-type(1) section .title-container h1 {
+    display: inline-block;
+    font-size: 54px !important;
+    color: #a03232;
+    background-color: #fdd5b1;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* ----------------------------------------------------------
+      3) STICKY NOTE + TAPE
+      ---------------------------------------------------------- */
+
+/* Sticky Note Container */
+section:nth-of-type(1) section .paper-container .sticky-note {
+    position: absolute;
+    top: 54%;
+    left: 28px;
+    width: 350px;
+    padding: 1.5rem 1rem 1rem;
+    background-color: #fffbc4;
+    border-radius: 8px;
+    box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
+    transform: rotate(-2deg);
+    overflow: visible;
+
+    font-family: 'Shadows Into Light', cursive, sans-serif;
+    color: #000;
+    font-size: 13px;
+    z-index: 200;
+}
+
+/* Darker adhesive top strip */
+section:nth-of-type(1) section .paper-container .sticky-note::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #fff8a1;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    z-index: 1;
+}
+
+/* Torn Tape Effect — More Visible */
+section:nth-of-type(1) section .paper-container .sticky-note::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(3deg);
+    width: 120px;
+    height: 40px;
+    z-index: 1;
+
+    background:
+        radial-gradient(circle 3px at 6px 6px, rgba(255, 255, 255, 0.5) 3px, transparent 0),
+        radial-gradient(circle 3px at 0px 0px, rgba(255, 255, 255, 0.5) 3px, transparent 0),
+        linear-gradient(to bottom, #ffc5c5 0%, #ff9898 100%);
+    background-repeat: repeat, repeat, no-repeat;
+    background-size: 12px 12px, 12px 12px, cover;
+    background-position: 0 0, 6px 6px, center;
+
+    border: 1px solid rgba(255, 100, 100, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    opacity: 0.98;
+    clip-path: polygon(0% 0%,
+            100% 0%,
+            93% 25%,
+            100% 50%,
+            93% 75%,
+            100% 100%,
+            0% 100%,
+            7% 75%,
+            0% 50%,
+            7% 25%);
+}
+
+/* Text/Headings Inside Sticky Note */
+section:nth-of-type(1) section .paper-container .sticky-note h2,
+section:nth-of-type(1) section .paper-container .sticky-note p,
+section:nth-of-type(1) section .paper-container .sticky-note ul,
+section:nth-of-type(1) section .paper-container .sticky-note li {
+    background-color: transparent;
+    box-shadow: none !important;
+    position: relative;
+    z-index: 3;
+    margin: 0.1rem;
+    font-family: inherit;
+    color: inherit;
+    line-height: 1.2;
+    font-size: 18px !important;
+}
+
+/* Slightly Larger H2 for Title in Sticky Note */
+section:nth-of-type(1) section .paper-container .sticky-note h2 {
+    font-size: 16px !important;
+}
+
+/* H4 heading style inside the sticky note */
+section:nth-of-type(1) section .paper-container .sticky-note h4 {
+    background-color: transparent;
+    box-shadow: none !important;
+    margin: 0.2rem 0 0.5rem;
+    font-size: 20px !important;
+    font-family: inherit;
+    color: inherit;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+/* ----------------------------------------------------------
+      4) UB LOGO + HELLO STICKER (on Title Slide)
+      ---------------------------------------------------------- */
+
+/* UB logo anchored bottom-right of paper container */
+section:nth-of-type(1) section .paper-container::after {
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    right: -160px;
+    width: 800px;
+    height: 400px;
+    background: url('../assets/university-at-buffalo.svg') no-repeat center / contain;
+    z-index: 9999;
+}
+
+/* “Hello My Name Is” sticker top-right */
+section:nth-of-type(1) section .hello-sticker {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    width: 220px;
+    background-color: #58b2b1;
+    border-radius: 8px;
+    border: 4px solid #fff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 1em;
+    text-align: center;
+    transform: rotate(-5deg);
+}
+
+section:nth-of-type(1) section .hello-sticker .sticker-header {
+    color: #fff;
+    font-size: 1.3em;
+    line-height: 1.2;
+    margin-bottom: 0.4em;
+}
+
+section:nth-of-type(1) section .hello-sticker .sticker-name {
+    background-color: #fff;
+    color: #444;
+    padding: 0.6em;
+    border-radius: 4px;
+    margin: 0 auto;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+}
+
+/* ----------------------------------------------------------
+      5) OTHER (NON-TITLE) SLIDES
+      ---------------------------------------------------------- */
+section:not(:nth-of-type(1)) {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    background-color: #b2d8b2;
+    overflow: hidden;
+}
+
+/* Example: skipping 2nd slide from dotted backgrounds */
+section:not(:nth-of-type(2)) .body-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    background-color: #fff2e5;
+    /* Warmer than #fffbf2 */
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    padding: 2em;
+
+    background-image: url("data:image/svg+xml;utf8,\
+       <svg width='40' height='40' xmlns='http://www.w3.org/2000/svg'>\
+         <line x1='0' y1='0' x2='40' y2='0' stroke='%23c9b7a4' stroke-width='0.7' stroke-dasharray='3 3'/>\
+         <line x1='0' y1='40' x2='40' y2='40' stroke='%23c9b7a4' stroke-width='0.7' stroke-dasharray='3 3'/>\
+         <line x1='0' y1='0' x2='0' y2='40' stroke='%23c9b7a4' stroke-width='0.7' stroke-dasharray='3 3'/>\
+         <line x1='40' y1='0' x2='40' y2='40' stroke='%23c9b7a4' stroke-width='0.7' stroke-dasharray='3 3'/>\
+       </svg>"
+        );
+    background-repeat: repeat;
+    background-size: 40px 40px;
+}
+
+/* Lists & sub-lists inside .body-container */
+.body-container ul {
+    list-style-type: disc;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.4;
+}
+
+.body-container li {
+    margin-bottom: 0.5em;
+}
+
+.body-container ul ul {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+
+.body-container ul ul li {
+    margin-bottom: 0.3em;
+}
+
+/* Inline code styling */
+.body-container code {
+    font-size: 1em !important;
+    line-height: 1.2 !important;
+    font-family: 'Patrick Hand', cursive, sans-serif;
+}
+
+/* A bit of shifting for the content zone */
+.notepad-zone {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: -40px;
+}
+
+/* Headings on slides (first child) */
+section :nth-of-type(1) h1 {
+    font-size: 36px !important;
+    color: #a03232;
+    text-align: center;
+    margin: 0.5em 0;
+    display: inline-block;
+    background-color: #ffe9b2;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+section :nth-of-type(1) h2 {
+    font-size: 30px !important;
+    color: #a03232;
+    text-align: left;
+    margin: 0.5em 0;
+    display: inline-block;
+    background-color: #e0fbb1;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+section :nth-of-type(1) h3 {
+    font-size: 26px !important;
+    color: #a03232;
+    text-align: left;
+    margin: 0.5em 0;
+    display: inline-block;
+    background-color: #ffd7d7;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+section :nth-of-type(1) h4 {
+    font-size: 22px !important;
+    color: #a03232;
+    text-align: left;
+    margin: 0.5em 0;
+    display: inline-block;
+    background-color: #ccf2ff;
+    padding: 0.3em 0.6em;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ----------------------------------------------------------
+      6) COLUMNS LAYOUT
+      ---------------------------------------------------------- */
+.columns {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.column.left-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.column.right-col {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Optional small caption styling */
+.caption {
+    font-size: 0.7em;
+    color: #666;
+    margin-top: 0.5em;
+    line-height: 1.1;
+}
+
+/* ----------------------------------------------------------
+      7) PAGINATION (arrow shape) on all slides
+      ---------------------------------------------------------- */
+section::after {
+    content: "Page " attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #fff;
+    text-shadow: none;
+    pointer-events: none;
+    background-color: #ffa8a8;
+    padding: 0.4em 1em 0.4em 0.4em;
+    clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+
+/* ----------------------------------------------------------
+      8) PSEUDO-CODE BLOCKS: "NOTEBOOK" STYLE
+      ---------------------------------------------------------- */
+.pseudo-code {
+    background-color: #fff9e6;
+    color: #333;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    padding: 0.3em;
+    margin: 0.2em 0;
+    font-family: 'Patrick Hand', cursive, sans-serif;
+    font-size: 1em;
+    line-height: 1.4;
+    white-space: pre;
+    display: block;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transform: rotate(-1deg);
+}
+
+/* ----------------------------------------------------------
+      9) IMAGE GALLERY (IF NEEDED)
+      ---------------------------------------------------------- */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.image-gallery img {
+    width: 300px;
+    height: auto;
+}
+
+/* ----------------------------------------------------------
+      10) TABLE STYLING
+      ---------------------------------------------------------- */
+.cute-table-container table {
+    border-collapse: collapse;
+    margin: 1em auto;
+    /* center the table */
+    width: 90%;
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+    border: 2px solid #ccc;
+    background-color: #fffef8;
+}
+
+.cute-table-container table th,
+.cute-table-container table td {
+    border: 1px solid #bbb;
+    padding: 0.6em 0.8em;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.2;
+}
+
+.cute-table-container table thead th {
+    background-color: #ffe9b2;
+    color: #444;
+    font-weight: bold;
+}
+
+.cute-table-container table tbody tr:nth-child(even) {
+    background-color: #fdf5e6;
+}
+
+/* ----------------------------------------------------------
+      11) MULTI-COLUMN TOC STYLING
+      ---------------------------------------------------------- */
+#toc-slide .toc-multi-col {
+    column-gap: 1.5em;
+    column-fill: auto;
+    /* or 'balance' */
+    max-height: calc(100% - 60px);
+    overflow-y: auto;
+}
+
+#toc-slide .toc-multi-col.col-1 {
+    column-count: 1;
+}
+
+#toc-slide .toc-multi-col.col-2 {
+    column-count: 2;
+}
+
+#toc-slide .toc-multi-col.col-3 {
+    column-count: 3;
+}
+
+#toc-slide .toc-multi-col.col-4 {
+    column-count: 4;
+}
+
+/* Override dotted background on the TOC slide */
+#toc-slide .body-container {
+    background-image: none;
+    background-color: #fff8e1;
+}
+
+/* TOC Slide Heading */
+#toc-slide h1 {
+    font-size: 40px !important;
+    color: #d34d4d;
+}
+
+/* TOC List Items */
+#toc-slide li {
+    margin-bottom: 0.4em;
+    list-style-type: disc;
+}
+
+/* TOC Links */
+#toc-slide a {
+    color: #007acc;
+    text-decoration: none;
+}
+
+#toc-slide a:hover {
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------------
+      12) SPIRAL NOTEBOOK-STYLE SLIDE
+      ---------------------------------------------------------- */
+section.spiral-slide {
+    position: relative;
+    width: 1280px;
+    /* Marp might override with 100% scaling */
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    background-color: #b2d8b2;
+    /* green background */
+    overflow: hidden;
+}
+
+section.spiral-slide .notebook-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Pink border around the white page */
+section.spiral-slide .page-border {
+    position: relative;
+    width: 900px;
+    height: 540px;
+    background-color: #d97c69;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Sticky tabs on the left */
+section.spiral-slide .sticky-tabs {
+    position: absolute;
+    top: 30%;
+    left: -90px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+/* Larger tab sizes */
+section.spiral-slide .sticky-tabs .tab-yellow,
+section.spiral-slide .sticky-tabs .tab-peach {
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+    box-shadow: none;
+    transform: rotate(-5deg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Yellow sticker image */
+section.spiral-slide .sticky-tabs .tab-yellow {
+    background-image: url('../assets/yellow_sticker.png');
+}
+
+/* Peach (or “red”) sticker image */
+section.spiral-slide .sticky-tabs .tab-peach {
+    background-image: url('../assets/red_sticker.png');
+}
+
+/* White page inside pink border */
+section.spiral-slide .white-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    /* bigger margin => thicker pink border */
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* "Spiral" image around the number "01" */
+section.spiral-slide .circle-number {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    background: url('../assets/spiral.png') no-repeat center / contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75em;
+}
+
+/* The text "01" in the center */
+section.spiral-slide .circle-number span {
+    font-family: 'Concert One', cursive, sans-serif;
+    font-size: 48px;
+    color: #444;
+}
+
+/* Big page title (e.g. "OVERVIEW") */
+section.spiral-slide .page-title {
+    font-family: 'Concert One', cursive, sans-serif;
+    font-size: 48px;
+    color: #a03232;
+    margin: 0.2em 0;
+}
+
+/* Subtitle text */
+section.spiral-slide .subtitle {
+    font-family: 'Patrick Hand', cursive, sans-serif;
+    font-size: 22px;
+    color: #444;
+    margin: 0;
+    text-align: center;
+}
+
+.small-caption {
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* ----------------------------------------------------------
+      CUTE IMAGE CONTAINER + PUSH PIN
+      ---------------------------------------------------------- */
+.notepad-zone .cute-image-container,
+.body-container .cute-image-container {
+    max-width: 100%;
+    /* Responsive limit so it won't overflow */
+    margin: 0.5em auto;
+    /* center horizontally, spacing above/below */
+    background: #fffef8;
+    /* Slightly off-white */
+    border: 3px dashed #ffd7d7;
+    /* pastel dashed border */
+    padding: 0.5em;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+    transform: rotate(-1deg);
+    /* slight tilt */
+    position: relative;
+}
+
+/* The actual image in the container */
+.notepad-zone .cute-image-container img,
+.body-container .cute-image-container img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Optional push pin in top-left corner */
+.notepad-zone .cute-image-container .push-pin,
+.body-container .cute-image-container .push-pin {
+    position: absolute;
+    top: -40px;
+    left: -30px;
+    width: 70px;
+    height: 70px;
+    background: url('../assets/push_pin.png') no-repeat center / contain;
+    transform: rotate(-30deg);
+    z-index: 9999;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* The small caption inside the container */
+.notepad-zone .cute-image-container .small-caption,
+.body-container .cute-image-container .small-caption {
+    font-size: 0.85em;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5em;
+    font-style: italic;
+}
