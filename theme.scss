@@ -703,18 +703,12 @@ section.spiral-slide .subtitle {
     text-align: center;
 }
 
-.small-caption {
-    font-size: 0.8em;
-    text-align: center;
-    margin-top: 0;
-}
-
 /* ----------------------------------------------------------
       CUTE IMAGE CONTAINER + PUSH PIN
       ---------------------------------------------------------- */
 .notepad-zone .cute-image-container,
 .body-container .cute-image-container {
-    max-width: 100%;
+    max-width: 90%;
     /* Responsive limit so it won't overflow */
     margin: 0.5em auto;
     /* center horizontally, spacing above/below */
@@ -754,12 +748,49 @@ section.spiral-slide .subtitle {
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-/* The small caption inside the container */
-.notepad-zone .cute-image-container .small-caption,
-.body-container .cute-image-container .small-caption {
-    font-size: 0.85em;
-    color: #666;
+/* -------------------------------------------------
+   BASE STYLES for any .small-caption
+------------------------------------------------- */
+.small-caption {
     text-align: center;
-    margin-top: 0.5em;
+    margin-top: 0;
+    color: #666;
     font-style: italic;
+}
+
+/* Neutralize the auto <p> tag when mixing Markdown in the same HTML block */
+.small-caption>p {
+    font-size: 18px !important;
+    all: unset;
+    display: contents;
+}
+
+/* Ensure KaTeX math in the caption is also #666 (same as caption text) */
+.small-caption .katex,
+.small-caption .katex *,
+.small-caption .katex .katex-html,
+.small-caption .katex .katex-html * {
+    color: inherit !important;
+    font-size: inherit !important;
+}
+
+
+/* math block */
+.katex-display {
+    position: relative;
+    margin: 1.5em auto;
+    padding: 1em;
+    max-width: 800px;
+    background-color: #fff9e6;
+    border: 2px dashed #ffd7d7;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+    transform: rotate(-1deg);
+    text-align: center;
+}
+
+/* Force math color to remain consistent */
+.katex-display .katex,
+.katex-display .katex * {
+    color: #444 !important;
 }
