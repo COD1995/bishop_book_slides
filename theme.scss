@@ -15,7 +15,7 @@ li,
 body,
 .katex {
     font-family: 'Patrick Hand', cursive, sans-serif;
-    font-size: 24px !important;
+    font-size: 22px !important;
     line-height: 1.2;
     color: #0c11a2;
     margin: 0;
@@ -357,7 +357,7 @@ section:not(:nth-of-type(2)) .body-container {
 .notepad-zone {
     padding-left: 20px;
     padding-right: 20px;
-    margin-top: -40px;
+    margin-top: -42px;
 }
 
 /* Headings on slides (first child) */
@@ -658,7 +658,7 @@ section.spiral-slide .white-page {
     bottom: 0;
     margin: 20px;
     /* bigger margin => thicker pink border */
-    background-color: #fff;
+    background-color: #fff2e5;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -720,6 +720,7 @@ section.spiral-slide .subtitle {
     border-radius: 8px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
     transform: rotate(-1deg);
+    top: 20px;
     /* slight tilt */
     position: relative;
 }
@@ -752,7 +753,7 @@ section.spiral-slide .subtitle {
    BASE STYLES for any .small-caption
 ------------------------------------------------- */
 .small-caption {
-    text-align: center;
+    text-align: left;
     margin-top: 0;
     color: #666;
     font-style: italic;
@@ -764,6 +765,26 @@ section.spiral-slide .subtitle {
     all: unset;
     display: contents;
 }
+
+/* Adjust list styling for .small-caption to bring bullet closer and align text left */
+.small-caption ul {
+    font-size: 18px !important;
+    list-style-position: inside !important;
+    margin-left: 0 !important;
+    /* remove default extra margin */
+    padding-left: 0 !important;
+    /* remove default padding */
+}
+
+.small-caption li {
+    font-size: 18px !important;
+    text-align: left !important;
+    /* ensure left alignment */
+    margin-left: 0.2em;
+    /* small indentation if desired */
+}
+
+
 
 /* Ensure KaTeX math in the caption is also #666 (same as caption text) */
 .small-caption .katex,
@@ -793,4 +814,207 @@ section.spiral-slide .subtitle {
 .katex-display .katex,
 .katex-display .katex * {
     color: #444 !important;
+}
+
+
+/* ----------------------------------------------------------
+   CUTE THEOREM BOX (Sticky Note) - EVEN CUTER VERSION
+---------------------------------------------------------- */
+.cute-theorem-box {
+    position: relative;
+    z-index: 999;
+    /* Ensure the note is on top */
+    width: 500px;
+    /* Adjust as needed */
+    min-height: 320px;
+    margin: 2em auto;
+    padding: 1.2em;
+    box-sizing: border-box;
+
+    /* A softer pastel gradient from top-left to bottom-right */
+    background: linear-gradient(to bottom right,
+            #fff2b0,
+            /* lighter top-left color */
+            #ffd27c
+            /* slightly deeper bottom-right color */
+        );
+
+    /* Slight tilt, plus a bigger shadow to stand out from the dotted background */
+    transform: rotate(-3deg);
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+
+    /* HOLE PUNCHES along the top:
+       each radial gradient “cuts out” a small circle of transparency */
+    background-repeat: no-repeat;
+    background-image:
+        radial-gradient(circle at 50px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 110px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 170px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 230px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 290px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 350px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 410px 6px, transparent 12px, #fff2b0 13px),
+        radial-gradient(circle at 470px 6px, transparent 12px, #fff2b0 13px);
+
+}
+
+/* Add the pencil image at the top-right corner */
+.cute-theorem-box::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: -25px;
+    width: 100px;
+    height: 100px;
+    rotate: -20deg;
+    background: url("../assets/cute_pencil.png") no-repeat center / contain;
+    transform: rotate(15deg);
+    z-index: 1000;
+}
+
+/* If KaTeX display math is inside the box, 
+     remove default block styling so it flows nicely */
+.cute-theorem-box .katex-display {
+    all: unset;
+    display: contents;
+}
+
+/* ----------------------------------------------------------
+     Example styles for text inside the note
+  ---------------------------------------------------------- */
+.cute-theorem-box .theorem-title {
+    margin-top: 0;
+    margin-bottom: 0.6em;
+    text-align: center;
+    font-family: 'Concert One', cursive;
+    font-size: 1.2em;
+    color: #b63d3d;
+}
+
+.cute-theorem-box .theorem-content {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1em;
+    line-height: 1.4;
+    color: #444;
+}
+
+/* ----------------------------------------------------------
+   13) QUESTION SLIDE STYLE (Updated)
+   ---------------------------------------------------------- */
+
+/* 1) QUESTION ICON AND BUBBLE NUMBERING FOR TOP-LEVEL QUESTIONS */
+section.question-slide .body-container .notepad-zone h2 {
+    position: relative;
+}
+
+/* Place the question icon near the H2 heading */
+section.question-slide .body-container .notepad-zone h2::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: -30px;
+    width: 60px;
+    height: 60px;
+    background: url("../assets/question.png") no-repeat center / contain;
+    /* Optionally add a shadow, etc. */
+}
+
+/* Bubbled numbering for main questions (<li>) in .question-bubble-list */
+section.question-slide .question-bubble-list {
+    counter-reset: questionCounter;
+    list-style: none;
+    /* remove default bullets */
+    margin: 1em 0;
+    padding: 0;
+}
+
+section.question-slide .question-bubble-list li {
+    counter-increment: questionCounter;
+    position: relative;
+    padding-left: 3em;
+    /* space for the bubble on the left */
+    margin-bottom: 1em;
+}
+
+section.question-slide .question-bubble-list li::before {
+    content: counter(questionCounter);
+    position: absolute;
+    left: 0;
+    top: -0.3em;
+    /* shift up slightly */
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #ffd7d7;
+    color: #444;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: none;
+    font-size: 1em;
+}
+
+/* Nested sub-list (the multiple-choice options): 
+   use normal bullets instead of pink bubbles. */
+section.question-slide .question-bubble-list li ul {
+    counter-reset: none;
+    /* no bubble counter in child UL */
+    list-style: disc;
+    /* normal bullet style */
+    margin-left: 1em;
+    /* indent for clarity */
+}
+
+section.question-slide .question-bubble-list li ul li {
+    counter-increment: none;
+    position: static;
+    padding-left: 0 !important;
+    margin-bottom: 0.4em;
+}
+
+section.question-slide .question-bubble-list li ul li::before {
+    content: none !important;
+    width: 0;
+    height: 0;
+}
+
+/* 2) CORRECT ANSWER: CHECK MARK + INLINE EXPLANATION
+   Mark the correct sub-list item with: class="correct-answer"
+*/
+/* Remove the bullet for .correct-answer items */
+section.question-slide .question-bubble-list li ul li.correct-answer {
+    list-style: none;
+    /* or list-style-type: none; */
+    position: relative;
+    padding-left: 1.5em;
+    /* space for the check mark on the left */
+    margin-left: 0;
+    /* ensure it aligns like other items */
+}
+
+/* Place the check mark at the left, where the bullet would be */
+section.question-slide .question-bubble-list li ul li.correct-answer::before {
+    content: "✔" !important;
+    background: none !important;
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    position: absolute;
+    left: -.5em;
+    /* same magnitude as margin-left, but negative */
+    top: 0.5em;
+    /* slight vertical offset, adjust as needed */
+}
+
+/* OPTIONAL: Inline explanation styling, if you wrap
+   your explanation text in <span class="explanation"> */
+section.question-slide .question-bubble-list li ul li.correct-answer .explanation {
+    display: inline-block;
+    margin-left: 0.5em;
+    font-style: italic;
+    color: #666;
+    font-size: 0.7em;
 }
