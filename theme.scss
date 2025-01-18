@@ -9,35 +9,65 @@
 /* ----------------------------------------------------------
       1) GLOBAL BASE STYLES
       ---------------------------------------------------------- */
+
 section,
 p,
 li,
-body,
-.katex {
+body {
     font-family: 'Patrick Hand', cursive, sans-serif;
-    font-size: 22px !important;
+    font-size: 24px !important;
     line-height: 1.2;
     color: #0c11a2;
     margin: 0;
     padding: 0;
     box-shadow: none;
-    /* no global shadow */
 }
 
+/* Override paragraph margin to create spacing */
+p {
+    margin: 0.6em 0.6em !important;
+    /* Top & bottom spacing */
+    line-height: 1.2;
+    /* Or 1.4, 1.6, etc. */
+}
+
+.katex {
+    font-size: 24px !important;
+    line-height: 1.4;
+    color: #0c11a2;
+}
+
+/* Display math block styling */
+.katex-display {
+    position: relative;
+    margin: 1.5em auto;
+    padding: 1em 0.2em !important;
+    max-width: 800px !important;
+    background-color: #fff9e6;
+    border: 2px dashed #ffd7d7;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+    transform: rotate(-1deg);
+    text-align: center;
+}
+
+/* Force display math color */
+.katex-display .katex,
+.katex-display .katex * {
+    color: #444 !important;
+}
+
+/* Slightly heavier bold text in paragraphs & lists */
 p b,
 p strong,
 li b,
 li strong {
     font-size: 1.05em;
-    /* helps text look heavier in cursive fonts */
     color: #b63d3d !important;
-
-    /* Subtle shadow to ‘fatten’ the strokes */
     text-shadow: 0.9px 0 0 #00000055;
-    /* horizontal shadow, half-transparent black */
 }
 
-/* Headings in Concert One */
+/* Headings in a different font (Concert One) */
 h1,
 h2,
 h3,
@@ -69,7 +99,7 @@ h4 {
       2) TITLE SLIDE (the very first slide)
       ---------------------------------------------------------- */
 
-/* Outer Marp slide (the 1st <section>) */
+/* Size and background for the 1st slide */
 section:nth-of-type(1) {
     position: relative;
     width: 1280px;
@@ -80,14 +110,14 @@ section:nth-of-type(1) {
     overflow: hidden;
 }
 
-/* Let the inner <section> also fill the entire 1280×720 */
+/* Allow an inner <section> to fill the entire slide */
 section:nth-of-type(1) section {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-/* Paper container (the white sheet) */
+/* Paper container (white sheet) */
 section:nth-of-type(1) section .paper-container {
     position: absolute;
     top: 30px;
@@ -110,7 +140,7 @@ section:nth-of-type(1) section .lined-paper {
             #f2dcc7 26px);
 }
 
-/* Centered title container */
+/* Title container, centered */
 section:nth-of-type(1) section .title-container {
     position: absolute;
     top: 36%;
@@ -119,7 +149,7 @@ section:nth-of-type(1) section .title-container {
     text-align: center;
 }
 
-/* Big peach background behind title text */
+/* Title text with peach background */
 section:nth-of-type(1) section .title-container h1 {
     display: inline-block;
     font-size: 54px !important;
@@ -136,7 +166,6 @@ section:nth-of-type(1) section .title-container h1 {
       3) STICKY NOTE + TAPE
       ---------------------------------------------------------- */
 
-/* Sticky Note Container */
 section:nth-of-type(1) section .paper-container .sticky-note {
     position: absolute;
     top: 54%;
@@ -148,14 +177,13 @@ section:nth-of-type(1) section .paper-container .sticky-note {
     box-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
     transform: rotate(-2deg);
     overflow: visible;
-
     font-family: 'Shadows Into Light', cursive, sans-serif;
     color: #000;
     font-size: 13px;
     z-index: 200;
 }
 
-/* Darker adhesive top strip */
+/* Adhesive strip at top */
 section:nth-of-type(1) section .paper-container .sticky-note::before {
     content: "";
     position: absolute;
@@ -169,7 +197,7 @@ section:nth-of-type(1) section .paper-container .sticky-note::before {
     z-index: 1;
 }
 
-/* Torn Tape Effect — More Visible */
+/* Torn tape effect at top */
 section:nth-of-type(1) section .paper-container .sticky-note::after {
     content: "";
     position: absolute;
@@ -179,7 +207,6 @@ section:nth-of-type(1) section .paper-container .sticky-note::after {
     width: 120px;
     height: 40px;
     z-index: 1;
-
     background:
         radial-gradient(circle 3px at 6px 6px, rgba(255, 255, 255, 0.5) 3px, transparent 0),
         radial-gradient(circle 3px at 0px 0px, rgba(255, 255, 255, 0.5) 3px, transparent 0),
@@ -187,7 +214,6 @@ section:nth-of-type(1) section .paper-container .sticky-note::after {
     background-repeat: repeat, repeat, no-repeat;
     background-size: 12px 12px, 12px 12px, cover;
     background-position: 0 0, 6px 6px, center;
-
     border: 1px solid rgba(255, 100, 100, 0.8);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
@@ -204,7 +230,7 @@ section:nth-of-type(1) section .paper-container .sticky-note::after {
             7% 25%);
 }
 
-/* Text/Headings Inside Sticky Note */
+/* Sticky note text/heading styles */
 section:nth-of-type(1) section .paper-container .sticky-note h2,
 section:nth-of-type(1) section .paper-container .sticky-note p,
 section:nth-of-type(1) section .paper-container .sticky-note ul,
@@ -220,12 +246,12 @@ section:nth-of-type(1) section .paper-container .sticky-note li {
     font-size: 18px !important;
 }
 
-/* Slightly Larger H2 for Title in Sticky Note */
+/* Slightly bigger h2 in note */
 section:nth-of-type(1) section .paper-container .sticky-note h2 {
     font-size: 16px !important;
 }
 
-/* H4 heading style inside the sticky note */
+/* H4 in note */
 section:nth-of-type(1) section .paper-container .sticky-note h4 {
     background-color: transparent;
     box-shadow: none !important;
@@ -241,7 +267,7 @@ section:nth-of-type(1) section .paper-container .sticky-note h4 {
       4) UB LOGO + HELLO STICKER (on Title Slide)
       ---------------------------------------------------------- */
 
-/* UB logo anchored bottom-right of paper container */
+/* UB logo bottom-right */
 section:nth-of-type(1) section .paper-container::after {
     content: "";
     position: absolute;
@@ -288,6 +314,7 @@ section:nth-of-type(1) section .hello-sticker .sticker-name {
 /* ----------------------------------------------------------
       5) OTHER (NON-TITLE) SLIDES
       ---------------------------------------------------------- */
+
 section:not(:nth-of-type(1)) {
     position: relative;
     width: 1280px;
@@ -298,7 +325,8 @@ section:not(:nth-of-type(1)) {
     overflow: hidden;
 }
 
-/* Example: skipping 2nd slide from dotted backgrounds */
+/* Example: remove dotted background from 2nd slide, 
+      but apply to others with .body-container */
 section:not(:nth-of-type(2)) .body-container {
     position: absolute;
     top: 30px;
@@ -306,12 +334,10 @@ section:not(:nth-of-type(2)) .body-container {
     right: 30px;
     bottom: 30px;
     background-color: #fff2e5;
-    /* Warmer than #fffbf2 */
     border-radius: 4px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     padding: 2em;
-
     background-image: url("data:image/svg+xml;utf8,\
        <svg width='40' height='40' xmlns='http://www.w3.org/2000/svg'>\
          <line x1='0' y1='0' x2='40' y2='0' stroke='%23c9b7a4' stroke-width='0.7' stroke-dasharray='3 3'/>\
@@ -324,7 +350,7 @@ section:not(:nth-of-type(2)) .body-container {
     background-size: 40px 40px;
 }
 
-/* Lists & sub-lists inside .body-container */
+/* Lists inside .body-container */
 .body-container ul {
     list-style-type: disc;
     margin-top: 0.5em;
@@ -346,21 +372,21 @@ section:not(:nth-of-type(2)) .body-container {
     margin-bottom: 0.3em;
 }
 
-/* Inline code styling */
+/* Inline code in .body-container */
 .body-container code {
     font-size: 1em !important;
     line-height: 1.2 !important;
     font-family: 'Patrick Hand', cursive, sans-serif;
 }
 
-/* A bit of shifting for the content zone */
+/* Slight top shift for .notepad-zone */
 .notepad-zone {
     padding-left: 20px;
     padding-right: 20px;
     margin-top: -42px;
 }
 
-/* Headings on slides (first child) */
+/* Headings at top of slides (non-title slides) */
 section :nth-of-type(1) h1 {
     font-size: 36px !important;
     color: #a03232;
@@ -438,7 +464,7 @@ section :nth-of-type(1) h4 {
 }
 
 /* ----------------------------------------------------------
-      7) PAGINATION (arrow shape) on all slides
+      7) PAGINATION (arrow shape)
       ---------------------------------------------------------- */
 section::after {
     content: "Page " attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
@@ -458,7 +484,7 @@ section::after {
 }
 
 /* ----------------------------------------------------------
-      8) PSEUDO-CODE BLOCKS: "NOTEBOOK" STYLE
+      8) PSEUDO-CODE BLOCKS (Notebook Style)
       ---------------------------------------------------------- */
 .pseudo-code {
     background-color: #fff9e6;
@@ -498,7 +524,6 @@ section::after {
 .cute-table-container table {
     border-collapse: collapse;
     margin: 1em auto;
-    /* center the table */
     width: 90%;
     max-width: 100%;
     max-height: 100%;
@@ -527,72 +552,15 @@ section::after {
 }
 
 /* ----------------------------------------------------------
-      11) MULTI-COLUMN TOC STYLING
-      ---------------------------------------------------------- */
-#toc-slide .toc-multi-col {
-    column-gap: 1.5em;
-    column-fill: auto;
-    /* or 'balance' */
-    max-height: calc(100% - 60px);
-    overflow-y: auto;
-}
-
-#toc-slide .toc-multi-col.col-1 {
-    column-count: 1;
-}
-
-#toc-slide .toc-multi-col.col-2 {
-    column-count: 2;
-}
-
-#toc-slide .toc-multi-col.col-3 {
-    column-count: 3;
-}
-
-#toc-slide .toc-multi-col.col-4 {
-    column-count: 4;
-}
-
-/* Override dotted background on the TOC slide */
-#toc-slide .body-container {
-    background-image: none;
-    background-color: #fff8e1;
-}
-
-/* TOC Slide Heading */
-#toc-slide h1 {
-    font-size: 40px !important;
-    color: #d34d4d;
-}
-
-/* TOC List Items */
-#toc-slide li {
-    margin-bottom: 0.4em;
-    list-style-type: disc;
-}
-
-/* TOC Links */
-#toc-slide a {
-    color: #007acc;
-    text-decoration: none;
-}
-
-#toc-slide a:hover {
-    text-decoration: underline;
-}
-
-/* ----------------------------------------------------------
-      12) SPIRAL NOTEBOOK-STYLE SLIDE
+      11) SPIRAL NOTEBOOK SLIDE
       ---------------------------------------------------------- */
 section.spiral-slide {
     position: relative;
     width: 1280px;
-    /* Marp might override with 100% scaling */
     height: 720px;
     margin: 0;
     padding: 0;
     background-color: #b2d8b2;
-    /* green background */
     overflow: hidden;
 }
 
@@ -604,7 +572,7 @@ section.spiral-slide .notebook-container {
     justify-content: center;
 }
 
-/* Pink border around the white page */
+/* Pink border around page */
 section.spiral-slide .page-border {
     position: relative;
     width: 900px;
@@ -615,7 +583,7 @@ section.spiral-slide .page-border {
     z-index: 1;
 }
 
-/* Sticky tabs on the left */
+/* Sticky tabs on the left side */
 section.spiral-slide .sticky-tabs {
     position: absolute;
     top: 30%;
@@ -639,17 +607,15 @@ section.spiral-slide .sticky-tabs .tab-peach {
     background-size: cover;
 }
 
-/* Yellow sticker image */
 section.spiral-slide .sticky-tabs .tab-yellow {
     background-image: url('../assets/yellow_sticker.png');
 }
 
-/* Peach (or “red”) sticker image */
 section.spiral-slide .sticky-tabs .tab-peach {
     background-image: url('../assets/red_sticker.png');
 }
 
-/* White page inside pink border */
+/* White page inside the pink border */
 section.spiral-slide .white-page {
     position: absolute;
     top: 0;
@@ -657,7 +623,6 @@ section.spiral-slide .white-page {
     right: 0;
     bottom: 0;
     margin: 20px;
-    /* bigger margin => thicker pink border */
     background-color: #fff2e5;
     border-radius: 8px;
     overflow: hidden;
@@ -667,7 +632,7 @@ section.spiral-slide .white-page {
     justify-content: center;
 }
 
-/* "Spiral" image around the number "01" */
+/* Spiral image around number "01" */
 section.spiral-slide .circle-number {
     position: relative;
     width: 180px;
@@ -679,14 +644,13 @@ section.spiral-slide .circle-number {
     margin-bottom: 0.75em;
 }
 
-/* The text "01" in the center */
 section.spiral-slide .circle-number span {
     font-family: 'Concert One', cursive, sans-serif;
     font-size: 48px;
     color: #444;
 }
 
-/* Big page title (e.g. "OVERVIEW") */
+/* Big page title in the spiral notebook */
 section.spiral-slide .page-title {
     font-family: 'Concert One', cursive, sans-serif;
     font-size: 48px;
@@ -694,7 +658,6 @@ section.spiral-slide .page-title {
     margin: 0.2em 0;
 }
 
-/* Subtitle text */
 section.spiral-slide .subtitle {
     font-family: 'Patrick Hand', cursive, sans-serif;
     font-size: 22px;
@@ -704,28 +667,22 @@ section.spiral-slide .subtitle {
 }
 
 /* ----------------------------------------------------------
-      CUTE IMAGE CONTAINER + PUSH PIN
+      12) CUTE IMAGE CONTAINER + PUSH PIN
       ---------------------------------------------------------- */
 .notepad-zone .cute-image-container,
 .body-container .cute-image-container {
     max-width: 90%;
-    /* Responsive limit so it won't overflow */
     margin: 0.5em auto;
-    /* center horizontally, spacing above/below */
     background: #fffef8;
-    /* Slightly off-white */
     border: 3px dashed #ffd7d7;
-    /* pastel dashed border */
     padding: 0.5em;
     border-radius: 8px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
     transform: rotate(-1deg);
-    top: 20px;
-    /* slight tilt */
     position: relative;
+    top: 20px;
 }
 
-/* The actual image in the container */
 .notepad-zone .cute-image-container img,
 .body-container .cute-image-container img {
     display: block;
@@ -750,8 +707,8 @@ section.spiral-slide .subtitle {
 }
 
 /* -------------------------------------------------
-   BASE STYLES for any .small-caption
-------------------------------------------------- */
+      13) .small-caption
+      ------------------------------------------------- */
 .small-caption {
     text-align: left;
     margin-top: 0;
@@ -759,93 +716,47 @@ section.spiral-slide .subtitle {
     font-style: italic;
 }
 
-/* Neutralize the auto <p> tag when mixing Markdown in the same HTML block */
+/* Neutralize auto <p> tags for inlined Markdown */
 .small-caption>p {
     font-size: 18px !important;
     all: unset;
     display: contents;
 }
 
-/* Adjust list styling for .small-caption to bring bullet closer and align text left */
+/* Adjust list styling within .small-caption */
 .small-caption ul {
     font-size: 18px !important;
     list-style-position: inside !important;
     margin-left: 0 !important;
-    /* remove default extra margin */
     padding-left: 0 !important;
-    /* remove default padding */
 }
 
 .small-caption li {
     font-size: 18px !important;
     text-align: left !important;
-    /* ensure left alignment */
     margin-left: 0.2em;
-    /* small indentation if desired */
 }
 
-
-
-/* Ensure KaTeX math in the caption is also #666 (same as caption text) */
-.small-caption .katex,
-.small-caption .katex *,
-.small-caption .katex .katex-html,
-.small-caption .katex .katex-html * {
-    color: inherit !important;
-    font-size: inherit !important;
+.small-caption .katex {
+    font-size: 18px !important;
+    color: #666;
 }
-
-
-/* math block */
-.katex-display {
-    position: relative;
-    margin: 1.5em auto;
-    padding: 1em;
-    max-width: 800px;
-    background-color: #fff9e6;
-    border: 2px dashed #ffd7d7;
-    border-radius: 8px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
-    transform: rotate(-1deg);
-    text-align: center;
-}
-
-/* Force math color to remain consistent */
-.katex-display .katex,
-.katex-display .katex * {
-    color: #444 !important;
-}
-
 
 /* ----------------------------------------------------------
-   CUTE THEOREM BOX (Sticky Note) - EVEN CUTER VERSION
----------------------------------------------------------- */
+      14) CUTE THEOREM BOX (Sticky Note-Style)
+      ---------------------------------------------------------- */
 .cute-theorem-box {
     position: relative;
     z-index: 999;
-    /* Ensure the note is on top */
     width: 500px;
-    /* Adjust as needed */
     min-height: 320px;
     margin: 2em auto;
     padding: 1.2em;
     box-sizing: border-box;
-
-    /* A softer pastel gradient from top-left to bottom-right */
-    background: linear-gradient(to bottom right,
-            #fff2b0,
-            /* lighter top-left color */
-            #ffd27c
-            /* slightly deeper bottom-right color */
-        );
-
-    /* Slight tilt, plus a bigger shadow to stand out from the dotted background */
+    background: linear-gradient(to bottom right, #fff2b0, #ffd27c);
     transform: rotate(-3deg);
     box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.15);
     border-radius: 6px;
-
-    /* HOLE PUNCHES along the top:
-       each radial gradient “cuts out” a small circle of transparency */
     background-repeat: no-repeat;
     background-image:
         radial-gradient(circle at 50px 6px, transparent 12px, #fff2b0 13px),
@@ -856,10 +767,9 @@ section.spiral-slide .subtitle {
         radial-gradient(circle at 350px 6px, transparent 12px, #fff2b0 13px),
         radial-gradient(circle at 410px 6px, transparent 12px, #fff2b0 13px),
         radial-gradient(circle at 470px 6px, transparent 12px, #fff2b0 13px);
-
 }
 
-/* Add the pencil image at the top-right corner */
+/* Pencil image on the theorem box */
 .cute-theorem-box::before {
     content: "";
     position: absolute;
@@ -873,16 +783,13 @@ section.spiral-slide .subtitle {
     z-index: 1000;
 }
 
-/* If KaTeX display math is inside the box, 
-     remove default block styling so it flows nicely */
+/* If KaTeX display math is inside, remove default block styling */
 .cute-theorem-box .katex-display {
     all: unset;
     display: contents;
 }
 
-/* ----------------------------------------------------------
-     Example styles for text inside the note
-  ---------------------------------------------------------- */
+/* Example text styles inside .cute-theorem-box */
 .cute-theorem-box .theorem-title {
     margin-top: 0;
     margin-bottom: 0.6em;
@@ -900,15 +807,14 @@ section.spiral-slide .subtitle {
 }
 
 /* ----------------------------------------------------------
-   13) QUESTION SLIDE STYLE (Updated)
-   ---------------------------------------------------------- */
+      15) QUESTION SLIDE STYLE
+      ---------------------------------------------------------- */
 
-/* 1) QUESTION ICON AND BUBBLE NUMBERING FOR TOP-LEVEL QUESTIONS */
 section.question-slide .body-container .notepad-zone h2 {
     position: relative;
 }
 
-/* Place the question icon near the H2 heading */
+/* Question icon near the H2 heading */
 section.question-slide .body-container .notepad-zone h2::before {
     content: "";
     position: absolute;
@@ -917,14 +823,12 @@ section.question-slide .body-container .notepad-zone h2::before {
     width: 60px;
     height: 60px;
     background: url("../assets/question.png") no-repeat center / contain;
-    /* Optionally add a shadow, etc. */
 }
 
-/* Bubbled numbering for main questions (<li>) in .question-bubble-list */
+/* Bubbled numbering for top-level questions */
 section.question-slide .question-bubble-list {
     counter-reset: questionCounter;
     list-style: none;
-    /* remove default bullets */
     margin: 1em 0;
     padding: 0;
 }
@@ -933,7 +837,6 @@ section.question-slide .question-bubble-list li {
     counter-increment: questionCounter;
     position: relative;
     padding-left: 3em;
-    /* space for the bubble on the left */
     margin-bottom: 1em;
 }
 
@@ -942,7 +845,6 @@ section.question-slide .question-bubble-list li::before {
     position: absolute;
     left: 0;
     top: -0.3em;
-    /* shift up slightly */
     width: 2em;
     height: 2em;
     border-radius: 50%;
@@ -956,15 +858,11 @@ section.question-slide .question-bubble-list li::before {
     font-size: 1em;
 }
 
-/* Nested sub-list (the multiple-choice options): 
-   use normal bullets instead of pink bubbles. */
+/* Normal bullet style for sub-lists */
 section.question-slide .question-bubble-list li ul {
     counter-reset: none;
-    /* no bubble counter in child UL */
     list-style: disc;
-    /* normal bullet style */
     margin-left: 1em;
-    /* indent for clarity */
 }
 
 section.question-slide .question-bubble-list li ul li {
@@ -976,45 +874,111 @@ section.question-slide .question-bubble-list li ul li {
 
 section.question-slide .question-bubble-list li ul li::before {
     content: none !important;
-    width: 0;
-    height: 0;
 }
 
-/* 2) CORRECT ANSWER: CHECK MARK + INLINE EXPLANATION
-   Mark the correct sub-list item with: class="correct-answer"
-*/
-/* Remove the bullet for .correct-answer items */
+/* Mark correct answers with a check mark */
 section.question-slide .question-bubble-list li ul li.correct-answer {
     list-style: none;
-    /* or list-style-type: none; */
     position: relative;
     padding-left: 1.5em;
-    /* space for the check mark on the left */
     margin-left: 0;
-    /* ensure it aligns like other items */
 }
 
-/* Place the check mark at the left, where the bullet would be */
 section.question-slide .question-bubble-list li ul li.correct-answer::before {
     content: "✔" !important;
     background: none !important;
     color: #27ae60;
     font-weight: bold;
     font-size: 1.2em;
-
     position: absolute;
-    left: -.5em;
-    /* same magnitude as margin-left, but negative */
+    left: -0.5em;
     top: 0.5em;
-    /* slight vertical offset, adjust as needed */
 }
 
-/* OPTIONAL: Inline explanation styling, if you wrap
-   your explanation text in <span class="explanation"> */
+/* Inline explanation if desired */
 section.question-slide .question-bubble-list li ul li.correct-answer .explanation {
     display: inline-block;
     margin-left: 0.5em;
     font-style: italic;
     color: #666;
     font-size: 0.7em;
+}
+
+/* ----------------------------------------------------------
+   TOC Slide (section.toc)
+---------------------------------------------------------- */
+
+/* Use a custom background image instead of dotted or solid color */
+section.toc .body-container {
+    /* Remove any existing dotted pattern or color */
+    background: url('/Users/jueguo/Desktop/bishop_book_slide/assets/toc.png') no-repeat center / cover !important;
+    background-color: none !important;
+    box-shadow: none !important;
+}
+
+/* Container for multi-column lists on TOC slides */
+section.toc .toc-multi-col {
+    column-gap: 3em;
+    column-fill: auto;
+    max-height: 470px !important;
+    overflow-y: auto;
+}
+
+/* Optional .col-1 to .col-4 classes for controlling column count */
+section.toc .toc-multi-col.col-1 {
+    column-count: 1;
+}
+
+section.toc .toc-multi-col.col-2 {
+    column-count: 2;
+}
+
+section.toc .toc-multi-col.col-3 {
+    column-count: 3;
+}
+
+section.toc .toc-multi-col.col-4 {
+    column-count: 4;
+}
+
+/* Larger heading for the TOC title */
+section.toc h1 {
+    top: 30px;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    font-size: 40px !important;
+    color: #d34d4d;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+section.toc h1::after {
+    content: "";
+    position: absolute;
+    /* Needed so top/left work */
+    top: -20%;
+    /* Move pointer lower (relative to H1's box) */
+    left: 100%;
+    /* Position to the right of the text */
+
+    width: 150px;
+    height: 200px;
+    background: url("../assets/pointer.png") no-repeat center / contain;
+    /* Adjust as needed */
+}
+
+/* Basic styling for TOC list items & links */
+section.toc li {
+    margin-bottom: 0.4em;
+    list-style-type: disc;
+}
+
+section.toc a {
+    color: #007acc;
+    text-decoration: none;
+}
+
+section.toc a:hover {
+    text-decoration: underline;
 }
